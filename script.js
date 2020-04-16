@@ -1,110 +1,124 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and score
+// went back to make it all a button instead of an instant prompt
+// gotta listen for the event
+// and turn the whole thing into a function so it won't start immediately
+// here is the function for the button:
+var generateBtn = document.querySelector("#generate");
+
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
+
+// and here is the listener:
+  generateBtn.addEventListener("click", writePassword);
 
 
-// 1. make the timer (done)
-// 2. make the start button (done)
-// 3. make the questions (done)
-// 4. make questions begin after clicking the start button
+// and here is the actual function -- all previous work now contained within this function
+function generatePassword() {
 
-// QUIZ SECTION
-// ~~~~~
+// went back to create this variable for what characters are allowed.
+var allowedChars = " "
+// went back again to make these their own variables
+// so that I can guarantee one of each type in the final passowrd
+var lowerCase = "abcdefghijklmnopqrstuvwxyz"
+var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var numericChar = "0123456789"
+var specialChar = "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+// which means we need a running variable to ++ every time they say yes
+var characterTypeTotal = 0; 
 
-var answerOne = prompt("Question  #1?")
-var answerTwo = prompt("Question  #2?")
-var answerThree = prompt("Question  #3?")
-var rightAnswers = 0;
+// but we also gotta know if they said yes to each question, so
+var lowerYes = false 
+var upperYes = false
+var numericYes = false
+var specialYes = false
 
-function beginQuiz() {
-    startTimer;
-    var rightAnswers = 0;
-    var answerOne = prompt("Question  #1?")
-    var answerTwo = prompt("Question  #2?")
-    var answerThree = prompt("Question  #3?")
-    if (answerOne != "Answer to #1 goes here."){
-        rightAnswers += 1;
-    }
-    if (answerTwo != "Answer to #2 goes here."){
-        rightAnswers += 1;
-    }
-    if (answerThree != "Answer to #3 goes here."){
-        rightAnswers += 1;
-    }
+// GIVEN I need a new, secure password
+// WHEN I click the button to generate a password
+// THEN I am presented with a series of prompts for password criteria
+  // so let's setup the prompts to ask the user for what criteria they want
+  // one at a time
+
+// WHEN prompted for the length of the password
+// THEN I choose a length of at least 8 characters and no more than 128 characters
+var passwordLongness = prompt("How long of a password? Please enter a number between 8 and 128.");
+// WHEN I answer each prompt
+// THEN my input should be validated 
+alert("You have entered " + passwordLongness + " characters.")
+// gotta parse the integer or computer will hate it because its a string
+passwordLongness = parseInt(passwordLongness)
+// test to make sure it works
+console.log(passwordLongness)
+
+
+// THEN I choose lowercase, 
+if (confirm("Lower case letters ok?")) {
+  allowedChars += "abcdefghijklmnopqrstuvwxyz"
+  // WHEN I answer each prompt THEN my input should be validated
+    alert("You have selected Yes.");
+    // increase our running count of character types and set the matching variable to true
+    characterTypeTotal++;
+    var lowerYes = true;
+}
+  else {
+  alert("You have selected No.")
+}
+
+// uppercase, 
+if (confirm ("Uppercase letters ok?")) {
+  allowedChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  // THEN my input should be validated
+  alert("Uppercase Letters Allowed")
+  characterTypeTotal++;
+  var upperYes = true;
+} else {
+  alert("you don't like upper case letters")
+}
+
+// numeric, 
+if (confirm ("Would you like to include numbers 0-9?")) {
+  allowedChars += "0123456789"
+  alert("You have selected Yes.")
+  characterTypeTotal++;
+  var numericYes = true;
+} else {
+  alert("You have selected No.")
+}
+
+// and/or special characters
+if (confirm ("Special characters ok?")) {
+// I copied these from the linked website by hand like a tool lol
+  allowedChars += "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+  alert("You have selected Yes.")
+  characterTypeTotal++;
+  var specialYes = true
+} else { 
+  alert("You have selected No.")
+}
+
+// print it to see if it works
+console.log(allowedChars)
+
+// wow it kinda works
+// now to set up the password generator proper
+// pw will start blank
+var newPassword = " "
+for (var i = 0, n = allowedChars.length; i < passwordLongness; ++i) {
+    newPassword += allowedChars.charAt(Math.floor(Math.random() * n));
+  }
+
+// print it
+console.log(newPassword)  
+return newPassword
 }
 
 
-var userName = prompt("Game over.  Please enter your name to see high scores.")
 
-// HIGH SCORE ARRAY (TBD)
-// ~~~~~
-var highScores =
-
-// HTML SECTION
-// ~~~~~
-
-// first let's make the title
-var h1Tag = document.createElement("h1");
-var h2Tag = document.createElement("h2");
-h1Tag.setAttribute("style", "text-align: center;");
-h2Tag.setAttribute("style", "text-align: center;");
-h1Tag.textContent = "Coding Quiz";
-h2Tag.textContent = "This is the sub headline.";
-// dom practice
-// They go in the order written here.
-document.body.append(h1Tag);
-document.body.append(h2Tag);
-
-// TIMER
-// ~~~~~~
-// Next, I'm going to add the timer.
-// 
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.text(minutes + ":" + seconds);
-
-        if (--timer < 0) {
-        timer = duration;
-        }
-        if (timer === 0) {
-            alert('sorry, out of time.  try again.')
-        }
-    }, 1000);
-
-}
-// displays timer
-jQuery(function ($) {
-    var timeLeft = 60 * 2,
-        display = $('#time');
-    startTimer(timeLeft, display);
-
-});
-
-// BUTTON
-// ~~~~~~
-// Next, I am making the button and adding an event listener so nothing happens
-// until the user hits the 'start quiz' button.
-var startBtn = document.querySelector("#button");
-
-
-// when "begin quiz" is clicked
-startBtn.addEventListener("click", () => {
-    beginQuiz();
-    startTimer;
-});
-
+// WHEN I answer each prompt
+// THEN my input should be validated and at least one character type should be selected
+  // ook i'll have to program that into the function later
+  // alright I feel like with 8 characters the odds at least 1 of each type requested
+  // will be chosen is pretty good...
+  // ok this part friggin killed me but i realized i could just subtract 1
+  // each time the user says yes... and then manually generate 1 of each char they want
