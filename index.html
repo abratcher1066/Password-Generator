@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Random Password Generator</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="style.css" />
 
 </head>
+
 <body>
-    <h1>Andrew's Okay Password Generator</h1>
-</header>
-<div class="container">
-  <div class="row">
-      <div class="card" style="width: 30rem;">
-      <img class="card-img-top">
-      <div class="card-body">
-        <h4 class="card-title">Click the button to generate your okay password.</h4>
-        <a href="#" id=generate class="btn btn-primary">Generate Now!</a>
-      <div class= "card-body">
-        <textarea readonly id='password' placeholder= "Password will appear here" aria-label="New Password">
-
-        </textarea>
-
+  <div class="wrapper">
+    <header>
+      <h1>Password Generator</h1>
+    </header>
+    <div class="card">
+      <div class="card-header">
+        <h2>Click the button below to generate a new password.</h2>
       </div>
+      <div class="card-body">
+        <textarea readonly id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
+      </div>
+      <div class="card-footer">
+        <button id="generate" class="btn">Generate Password</button>
+      </div>
+    </div>
   </div>
-</div>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
