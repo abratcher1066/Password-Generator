@@ -19,7 +19,7 @@ This password generator creates a new, strong password, according to custom para
 
 ## Installation
 ----
-Visit [the online version on GitHub](https://duckduckgo.com), or clone the repo and open index.html in your browser.
+Visit [the online version on GitHub](https://tanksareforcowards.github.io/Password-Generator/), or clone the repo and open index.html in your browser.
 
 ![second image](https://i.ibb.co/xqCCJKw/Readme1.png)
 
