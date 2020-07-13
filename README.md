@@ -5,7 +5,7 @@
 
 ## Description
 ----
-This password generator creates a new, strong password, according to custom parameters the user selects.  Passwords can be between 8 and 128 characters, and can include numbers, special characters, capital letters, and lower case letters.
+This password generator creates a new, strong password, according to custom parameters chosen by the user.  Passwords can be between 8 and 128 characters, and can include numbers, special characters, capital letters, and lower case letters.
 
 ![first image](https://i.ibb.co/3Tr3DLL/binary-numbers-on-computer-screen-1260358.jpg)
 
